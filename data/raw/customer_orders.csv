@@ -1,0 +1,9 @@
+order_id,customer_id,product,amount,city,order_date
+1,101,Laptop,55000,Pune,2025-01-01
+2,102,Phone,30000,Mumbai,2025-01-01
+3,103,Keyboard,2000,Delhi,2025-01-02
+4,104,Mouse,1500,Pune,2025-01-02
+5,105,Monitor,12000,Bangalore,2025-01-03
+6,106,Tablet,25000,Mumbai,2025-01-03
+7,107,Printer,18000,Delhi,2025-01-04
+8,108,Speaker,7000,Pune,2025-01-04
