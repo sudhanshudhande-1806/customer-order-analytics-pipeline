@@ -55,3 +55,22 @@ Business Insights
 
 ```bash
 python spark_jobs/transform.py
+
+
+
+## Screenshots
+
+### Project Structure
+![Project Structure](docs/screenshots/vscode-project-structure.png)
+
+### ETL Pipeline Output
+![ETL Pipeline](docs/screenshots/etl-output.png)
+
+### Validation Output
+![Validation](docs/screenshots/validation-output.png)
+
+### Reporting Output
+![Reporting](docs/screenshots/reporting-output.png)
+
+### GitHub Repository
+![GitHub](docs/screenshots/github-repository.png)
