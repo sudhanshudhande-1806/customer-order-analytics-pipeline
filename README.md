@@ -1,21 +1,26 @@
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![PySpark](https://img.shields.io/badge/PySpark-3.5-orange)
+![Apache Spark](https://img.shields.io/badge/Apache%20Spark-Big%20Data-red)
+![License](https://img.shields.io/badge/License-MIT-green)
 # Customer Order Analytics Pipeline
 
 ## Overview
-Production-style ETL pipeline built using PySpark, Apache Spark, Hadoop, SQL, and Apache Airflow for processing customer transaction datasets and generating analytical business reports.
+
+Production-style ETL pipeline built using PySpark, Apache Spark, Hadoop, SQL, and workflow orchestration concepts for processing customer transaction datasets and generating analytical business reports.
 
 ---
 
 ## Features
 
-- Scalable batch ETL processing
-- PySpark data transformations
+- Scalable ETL pipeline
+- Spark DataFrame transformations
 - Customer sales analytics
 - Product sales reporting
 - Logging and monitoring
-- Data validation checks
-- Airflow workflow orchestration
+- Data validation
+- CI/CD GitHub Actions
 - Docker-ready architecture
-- Modular code structure
+- Modular production-style code structure
 
 ---
 
@@ -25,14 +30,14 @@ Production-style ETL pipeline built using PySpark, Apache Spark, Hadoop, SQL, an
 - PySpark
 - Apache Spark
 - Hadoop
-- Apache Airflow
 - SQL
 - Docker
-- Azure Databricks
+- GitHub Actions
+- Azure Databricks (architecture-ready)
 
 ---
 
-## Architecture
+## Project Architecture
 
 Raw CSV Data
 ↓
@@ -40,11 +45,9 @@ PySpark ETL Pipeline
 ↓
 Spark Transformations
 ↓
-Processed Reports
+Analytics Reports
 ↓
-Analytics Output
-↓
-Airflow Automation
+Business Insights
 
 ---
 
