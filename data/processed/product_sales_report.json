@@ -1,0 +1,34 @@
+[
+    {
+        "product":"Speaker",
+        "product_sales":7000.0
+    },
+    {
+        "product":"Phone",
+        "product_sales":30000.0
+    },
+    {
+        "product":"Laptop",
+        "product_sales":55000.0
+    },
+    {
+        "product":"Mouse",
+        "product_sales":1500.0
+    },
+    {
+        "product":"Tablet",
+        "product_sales":25000.0
+    },
+    {
+        "product":"Printer",
+        "product_sales":18000.0
+    },
+    {
+        "product":"Keyboard",
+        "product_sales":2000.0
+    },
+    {
+        "product":"Monitor",
+        "product_sales":12000.0
+    }
+]

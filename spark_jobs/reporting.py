@@ -7,10 +7,11 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # Read Processed Report
-city_df = spark.read.parquet(
-    "data/processed/city_sales_report"
+city_df = spark.read.csv(
+    "data/processed/city_sales_report",
+    header=True,
+    inferSchema=True
 )
-
 print("FINAL ANALYTICS REPORT")
 
 city_df.show()

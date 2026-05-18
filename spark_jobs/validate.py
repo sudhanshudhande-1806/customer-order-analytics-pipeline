@@ -1,21 +1,20 @@
 from pyspark.sql import SparkSession
+import pandas as pd
 
-# Create Spark Session
 spark = SparkSession.builder \
     .master("local[*]") \
     .appName("Validation") \
+    .config("spark.hadoop.io.native.lib.available", "false") \
     .getOrCreate()
 
-# Read Processed Data
-df = spark.read.parquet(
-    "data/processed/city_sales_report"
+df = pd.read_json(
+    "data/processed/city_sales_report.json"
 )
 
 print("VALIDATED DATA")
-df.show()
+print(df)
 
-# Validation Check
-if df.count() == 0:
+if df.empty:
     raise Exception("Validation Failed")
 
 print("VALIDATION SUCCESSFUL")

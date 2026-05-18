@@ -1,0 +1,26 @@
+[
+    {
+        "city":"Bangalore",
+        "total_sales":12000.0,
+        "average_sales":12000.0,
+        "total_orders":1
+    },
+    {
+        "city":"Mumbai",
+        "total_sales":55000.0,
+        "average_sales":27500.0,
+        "total_orders":2
+    },
+    {
+        "city":"Pune",
+        "total_sales":63500.0,
+        "average_sales":21166.6666666667,
+        "total_orders":3
+    },
+    {
+        "city":"Delhi",
+        "total_sales":20000.0,
+        "average_sales":10000.0,
+        "total_orders":2
+    }
+]

@@ -1,11 +1,12 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, sum, avg, count
 
-# Create Spark Session
 spark = SparkSession.builder \
     .master("local[*]") \
     .appName("CustomerOrderAnalytics") \
-    .config("spark.driver.memory", "2g") \
+    .config("spark.hadoop.io.native.lib.available", "false") \
+    .config("spark.driver.extraJavaOptions", "-Djava.library.path=") \
+    .config("spark.executor.extraJavaOptions", "-Djava.library.path=") \
     .getOrCreate()
 
 print("SPARK SESSION CREATED")
@@ -51,14 +52,17 @@ print("PRODUCT SALES REPORT")
 product_sales.show()
 
 # Save Processed Data
-sales_by_city.write.mode("overwrite").parquet(
-    "data/processed/city_sales_report"
+sales_by_city.toPandas().to_json(
+    "data/processed/city_sales_report.json",
+    orient="records",
+    indent=4
 )
 
-product_sales.write.mode("overwrite").parquet(
-    "data/processed/product_sales_report"
+product_sales.toPandas().to_json(
+    "data/processed/product_sales_report.json",
+    orient="records",
+    indent=4
 )
-
 print("DATA SAVED SUCCESSFULLY")
 
 spark.stop()
