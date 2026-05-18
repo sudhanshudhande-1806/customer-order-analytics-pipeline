@@ -1,19 +1,9 @@
-from pyspark.sql import SparkSession
+import pandas as pd
 
-# Create Spark Session
-spark = SparkSession.builder \
-    .master("local[*]") \
-    .appName("Reporting") \
-    .getOrCreate()
-
-# Read Processed Report
-city_df = spark.read.csv(
-    "data/processed/city_sales_report",
-    header=True,
-    inferSchema=True
+# Read JSON report
+df = pd.read_json(
+    "data/processed/city_sales_report.json"
 )
+
 print("FINAL ANALYTICS REPORT")
-
-city_df.show()
-
-spark.stop()
+print(df)

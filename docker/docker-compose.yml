@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  spark:
+    image: bitnami/spark:latest
+
+  airflow:
+    image: apache/airflow:latest
+    ports:
+      - "8080:8080"

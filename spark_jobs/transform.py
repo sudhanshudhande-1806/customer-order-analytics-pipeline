@@ -1,70 +1,73 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, sum, avg, count
+from utils import setup_logger
+import pandas as pd
 
-spark = SparkSession.builder \
-    .master("local[*]") \
-    .appName("CustomerOrderAnalytics") \
-    .config("spark.hadoop.io.native.lib.available", "false") \
-    .config("spark.driver.extraJavaOptions", "-Djava.library.path=") \
-    .config("spark.executor.extraJavaOptions", "-Djava.library.path=") \
-    .getOrCreate()
+logger = setup_logger()
 
-print("SPARK SESSION CREATED")
+try:
+    # Create Spark Session
+    spark = SparkSession.builder \
+        .master("local[*]") \
+        .appName("CustomerOrderAnalytics") \
+        .config("spark.hadoop.io.native.lib.available", "false") \
+        .getOrCreate()
 
-# Read CSV File
-orders_df = spark.read.csv(
-    "data/raw/customer_orders.csv",
-    header=True,
-    inferSchema=True
-)
+    logger.info("Spark Session Created")
 
-print("RAW DATA")
-orders_df.show()
+    # Read CSV File
+    orders_df = spark.read.csv(
+        "data/raw/customer_orders.csv",
+        header=True,
+        inferSchema=True
+    )
 
-# Remove Null Values
-orders_df = orders_df.dropna()
+    logger.info("CSV Loaded Successfully")
 
-# Convert amount column
-orders_df = orders_df.withColumn(
-    "amount",
-    col("amount").cast("double")
-)
+    # Remove Null Values
+    orders_df = orders_df.dropna()
 
-print("CLEANED DATA")
-orders_df.show()
+    # Convert amount column
+    orders_df = orders_df.withColumn(
+        "amount",
+        col("amount").cast("double")
+    )
 
-# City Sales Analytics
-sales_by_city = orders_df.groupBy("city").agg(
-    sum("amount").alias("total_sales"),
-    avg("amount").alias("average_sales"),
-    count("*").alias("total_orders")
-)
+    # City Sales Analytics
+    sales_by_city = orders_df.groupBy("city").agg(
+        sum("amount").alias("total_sales"),
+        avg("amount").alias("average_sales"),
+        count("*").alias("total_orders")
+    )
 
-print("CITY SALES REPORT")
-sales_by_city.show()
+    # Product Analytics
+    product_sales = orders_df.groupBy("product").agg(
+        sum("amount").alias("product_sales")
+    )
 
-# Product Analytics
-product_sales = orders_df.groupBy("product").agg(
-    sum("amount").alias("product_sales")
-)
+    # Save Reports as JSON
+    sales_by_city.toPandas().to_json(
+        "data/processed/city_sales_report.json",
+        orient="records",
+        indent=4
+    )
 
-print("PRODUCT SALES REPORT")
-product_sales.show()
+    product_sales.toPandas().to_json(
+        "data/processed/product_sales_report.json",
+        orient="records",
+        indent=4
+    )
 
-# Save Processed Data
-sales_by_city.toPandas().to_json(
-    "data/processed/city_sales_report.json",
-    orient="records",
-    indent=4
-)
+    print("DATA SAVED SUCCESSFULLY")
 
-product_sales.toPandas().to_json(
-    "data/processed/product_sales_report.json",
-    orient="records",
-    indent=4
-)
-print("DATA SAVED SUCCESSFULLY")
+    logger.info("Reports Generated Successfully")
 
-spark.stop()
+    spark.stop()
 
-print("ETL PIPELINE COMPLETED SUCCESSFULLY")
+    logger.info("Pipeline Completed Successfully")
+
+    print("ETL PIPELINE COMPLETED SUCCESSFULLY")
+
+except Exception as e:
+    logger.error(f"Pipeline Failed: {str(e)}")
+    print(f"ERROR: {str(e)}")

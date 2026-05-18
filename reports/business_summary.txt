@@ -1,0 +1,10 @@
+Customer Analytics Business Report
+
+Top Performing City: Pune
+Highest Revenue Product: Laptop
+Total Orders Processed: 8
+
+Insights:
+- Pune generated highest revenue
+- Laptop category dominates sales
+- Mumbai has strong average order value
